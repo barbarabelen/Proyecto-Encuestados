@@ -61,8 +61,8 @@ VistaAdministrador.prototype = {
         //contenedor del texto de la respuesta
         let respuesta = $(this).val();
         //cantidad de votos seteada en 0
-        if(respuesta !== ' '){
-          respuestas.push({'textoRespuesta': 'respuesta', 'cantidad': 0});
+        if(respuesta !== ''){
+          respuestas.push({'textoRespuesta': 'respuesta'});
         }
       })
       contexto.limpiarFormulario();
