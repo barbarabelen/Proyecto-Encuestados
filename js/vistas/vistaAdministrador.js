@@ -28,7 +28,7 @@ VistaAdministrador.prototype = {
     var nuevoItem;
     
     //asignar a nuevoitem un elemento li con clase "list-group-item", id "pregunta.id" y texto "pregunta.textoPregunta"
-    nuevoItem = $('<li></li>').addClass('list-group-item').attr('id', pregunta.id);
+    nuevoItem = $('<li></li>').addClass('list-group-item').attr('id', pregunta.id).text(pregunta.textoPregunta); //chequear si agregué bien el .text
     var interiorItem = $('.d-flex');
     var titulo = interiorItem.find('h5');
     titulo.text(pregunta.textoPregunta);
@@ -62,7 +62,7 @@ VistaAdministrador.prototype = {
         let respuesta = $(this).val();
         //cantidad de votos seteada en 0
         if(respuesta !== ''){
-          respuestas.push({'textoRespuesta': 'respuesta'});
+          respuestas.push({'textoRespuesta': respuesta});
         }
       })
       contexto.limpiarFormulario();
