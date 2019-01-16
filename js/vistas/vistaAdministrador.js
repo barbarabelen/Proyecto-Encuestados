@@ -19,6 +19,8 @@ VistaAdministrador.prototype = {
   inicializar: function() {
     //llamar a los metodos para reconstruir la lista, configurar botones y validar formularios
     validacionDeFormulario();
+    this.reconstruirLista();
+    this.configuracionDeBotones();
   },
 
   construirElementoPregunta: function(pregunta){
@@ -68,3 +70,4 @@ VistaAdministrador.prototype = {
     $('.form-group.answer.has-feedback.has-success').remove();
   },
 };
+
