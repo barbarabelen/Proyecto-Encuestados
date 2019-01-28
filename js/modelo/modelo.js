@@ -8,6 +8,8 @@ var Modelo = function() {
   //inicializacion de eventos
   this.preguntaAgregada = new Evento(this);
   this.preguntaEliminada = new Evento(this);
+  this.preguntasEliminadas = new Evento(this);
+  this.respuestaAgregada = new Evento(this);
 };
 
 Modelo.prototype = {
@@ -41,6 +43,28 @@ Modelo.prototype = {
     this.preguntas = array;
     this.guardar();
     this.preguntaEliminada.notificar();
+  },
+
+  //se eliminan todas las preguntas
+  borrarTodo: function() {
+    this.preguntas = [];
+    this.ultimoId = 0;
+    this.guardar();
+    this.preguntasEliminadas.notificar();
+  },
+
+  getPreguntaByID: function(id){
+    const pregunta = this.preguntas.filter(function(pregunta){
+      return pregunta.id === id;
+    })
+    return pregunta[0];
+  },
+
+  agregarRespuesta: function(id, respuesta){
+    const pregunta = this.getPreguntaByID(id);
+    pregunta.cantidadPorRespuesta.push(respuesta);
+    this.guardar();
+    this.respuestaAgregada.notificar();
   },
 
   //se guardan las preguntas
