@@ -13,7 +13,14 @@ var VistaAdministrador = function(modelo, controlador, elementos) {
   });
   this.modelo.preguntaEliminada.suscribir(function() {
     contexto.reconstruirLista();
-  })
+  });
+  this.modelo.preguntasEliminadas.suscribir(function() {
+    contexto.reconstruirLista();
+  });
+  this.modelo.preguntaEditada.suscribir(function() {
+    contexto.reconstruirLista();
+  });
+  
 };
 
 

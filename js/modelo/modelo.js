@@ -2,6 +2,7 @@
  * Modelo
  */
 var Modelo = function() {
+  this.estado = this.cargar();
   this.preguntas = [];
   this.ultimoId = 0;
 
@@ -87,7 +88,24 @@ Modelo.prototype = {
     this.votoAgregado.notificar();
   },
 
+  gerPreguntas: function(){
+    return this.preguntas;
+  },
+
+  cargar: function(){
+    const estado = localStorage.getItem('estado');
+    if(!estado){
+      return {
+        preguntas: [],
+        preguntasEditadas: {}
+      }
+    }else {
+        return JSON.parse(estado);
+      }
+  },
+
   //se guardan las preguntas
   guardar: function(){
+    localStorage.setItem('estado', JSON.stringify(this.estado))
   },
 };
