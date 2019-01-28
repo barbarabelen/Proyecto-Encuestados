@@ -10,6 +10,7 @@ var Modelo = function() {
   this.preguntaEliminada = new Evento(this);
   this.preguntasEliminadas = new Evento(this);
   this.respuestaAgregada = new Evento(this);
+  this.preguntaEditada = new Evento(this);
 };
 
 Modelo.prototype = {
@@ -65,6 +66,14 @@ Modelo.prototype = {
     pregunta.cantidadPorRespuesta.push(respuesta);
     this.guardar();
     this.respuestaAgregada.notificar();
+  },
+
+  editarPregunta: function(id, nuevaPregunta, nuevasRespuestas){
+    const pregunta = this.getPreguntaByID(id);
+    pregunta.textoPregunta= nuevaPregunta;
+    pregunta.cantidadPorRespuesta= nuevasRespuestas;
+    this.guardar();
+    this.preguntaEditada.notificar();
   },
 
   //se guardan las preguntas
