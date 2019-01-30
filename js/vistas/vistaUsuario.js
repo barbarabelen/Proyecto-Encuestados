@@ -34,7 +34,16 @@ VistaUsuario.prototype = {
   reconstruirGrafico: function(){
     var contexto = this;
     //obtiene las preguntas del local storage
-    var preguntas = this.modelo.preguntas;
+    var preguntas = this.controlador.getPreguntas().filter(function(pregunta){
+      let cantVotos = pregunta.cantidadPorRespuesta.map(function(respuesta){
+        return respuesta.votos;
+      }).reduce(function(acumulado, voto){
+        return acumulado + voto;
+      }, 0)
+      return cantVotos>0;
+    })
+
+    preguntas = this.modelo.preguntas;
     preguntas.forEach(function(clave){
       var listaParaGrafico = [[clave.textoPregunta, 'Cantidad']];
       var respuestas = clave.cantidadPorRespuesta;
