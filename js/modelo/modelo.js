@@ -88,7 +88,7 @@ Modelo.prototype = {
     this.votoAgregado.notificar();
   },
 
-  gerPreguntas: function(){
+  getPreguntas: function(){
     return this.preguntas;
   },
 
