@@ -92,6 +92,7 @@ Modelo.prototype = {
     return this.preguntas;
   },
 
+  //localstorage incompleto :/
   cargar: function(){
     const estado = localStorage.getItem('estado');
     if(!estado){
