@@ -2,9 +2,10 @@
  * Modelo
  */
 var Modelo = function() {
-  this.estado = this.cargar();
+  
   this.preguntas = [];
   this.ultimoId = 0;
+  this.cargar();
 
   //inicializacion de eventos
   this.preguntaAgregada = new Evento(this);
@@ -92,21 +93,21 @@ Modelo.prototype = {
     return this.preguntas;
   },
 
-  //localstorage incompleto :/
+ 
   cargar: function(){
-    const estado = localStorage.getItem('estado');
-    if(!estado){
+    const preguntaInfo = localStorage.getItem('preguntas');
+    if(!preguntaInfo){
       return {
         preguntas: [],
         preguntasEditadas: {}
       }
     }else {
-        return JSON.parse(estado);
+        this.preguntas = JSON.parse(preguntaInfo);
       }
   },
 
   //se guardan las preguntas
   guardar: function(){
-    localStorage.setItem('estado', JSON.stringify(this.estado))
+    localStorage.setItem('preguntas', JSON.stringify(this.preguntas))
   },
 };
