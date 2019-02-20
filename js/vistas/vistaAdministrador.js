@@ -88,6 +88,21 @@ VistaAdministrador.prototype = {
     })
   },
 
+  cargarModal: function(idSelecionado){
+
+    var contexto = this;
+    var preguntas = this.modelo.preguntas;
+    contexto.elementos.modal.toggle();
+    contexto.elementos.fondoModal.toggle();
+
+    let datosPreguntaAEditar = preguntas.find(function(element) {
+      if (element.id === idSelecionado) {
+        return element;
+      }
+    });
+  
+  },
+
   limpiarFormulario: function(){
     $('.form-group.answer.has-feedback.has-success').remove();
   },
