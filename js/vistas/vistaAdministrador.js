@@ -28,7 +28,8 @@ VistaAdministrador.prototype = {
   //lista
   inicializar: function () {
     //llamar a los metodos para reconstruir la lista, configurar botones y validar formularios
-    validacionDeFormulario();
+    validacionDeFormulario('#localStorageForm', '#optionTemplate');
+    validacionDeFormulario('#form-modal', '#optionModal');
     this.reconstruirLista();
     this.configuracionDeBotones();
   },
@@ -80,15 +81,39 @@ VistaAdministrador.prototype = {
       contexto.limpiarFormulario();
       contexto.controlador.agregarPregunta(value, respuestas);
     });
+
     //asociar el resto de los botones a eventos
     e.botonBorrarPregunta.click(function () {
       let id = parseInt($('.list-group-item.active').attr('id'));
       contexto.controlador.borrarPregunta(id);
     })
+
     e.borrarTodo.click(function () {
       contexto.controlador.borrarTodo();
     })
+
+    e.botonEditarPregunta.click(function () {
+      let idSeleccionado = parseInt($('.list-group-item.active').attr('id'));
+
+      if (isNaN(idSeleccionado)) {
+        alert("Debe seleccionar una pregunta.")
+        return
+      }
+      contexto.modelo.idPreguntaAEditar = idSeleccionado
+      contexto.cargarModal(idSeleccionado)
+    }
+  )
+
+  e.cerrarModal.click(function() {
+        $('.borrarOpcionModal').remove();
+        contexto.elementos.modal.toggle();
+        contexto.elementos.fondoModal.toggle();
+    }
+);
+
   },
+
+  
 
   cargarModal: function (idSelecionado) {
 
@@ -103,11 +128,11 @@ VistaAdministrador.prototype = {
       }
     });
 
-    $('#pregunta-modal').val(datosPreguntaAEditar.textoPregunta);
+    $('#preguntaModal').val(datosPreguntaAEditar.textoPregunta);
 
     for (let i = 0; i < datosPreguntaAEditar.cantidadPorRespuesta.length; i++) {
       if (i === 0) {
-        $('#respuesta-modal').find($('[name="optionModal[]"]')).val(datosPreguntaAEditar.cantidadPorRespuesta[i].textoRespuesta);
+        $('#respuestaModal').find($('[name="optionModal[]"]')).val(datosPreguntaAEditar.cantidadPorRespuesta[i].textoRespuesta);
       } else {
 
         var $template = $('#optionModal'),
@@ -128,4 +153,6 @@ VistaAdministrador.prototype = {
   limpiarFormulario: function () {
     $('.form-group.answer.has-feedback.has-success').remove();
   },
+
+  //falta mostrar las preguntas editadas
 };
