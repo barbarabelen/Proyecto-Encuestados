@@ -78,6 +78,7 @@ VistaAdministrador.prototype = {
           });
         }
       })
+      console.log(respuestas);
       contexto.limpiarFormulario();
       contexto.controlador.agregarPregunta(value, respuestas);
     });
@@ -143,6 +144,7 @@ VistaAdministrador.prototype = {
           .attr('id', "respuesta" + this.cantRespuestas)
           .insertBefore($template)
         $option = $clone.find('[name="optionModal[]"]');
+        console.log($option);
         $option.val(datosPreguntaAEditar.cantidadPorRespuesta[i].textoRespuesta),
           $('#form-modal').formValidation('addField', $option)
 
